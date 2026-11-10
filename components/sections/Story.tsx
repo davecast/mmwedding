@@ -1,85 +1,150 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { Reveal } from "../Reveal";
+import { StoryTitle } from "../StoryTitle";
+import { Depth, Stage } from "../Stage";
+import { TimelineGallery } from "../TimelineGallery";
+import { Mask } from "../Mask";
 
-function Year({ children }: { children: string }) {
+/** Year in a double, offset frame with a stem running down into the collage. */
+function Year({ children, first }: { children: string; first?: boolean }) {
   return (
-    <Reveal from="down" className="my-12 flex justify-center">
-      <span className="framed px-8 py-1 font-serif text-xl text-sage-deep">{children}</span>
+    <Reveal from="down" className={`relative flex justify-center ${first ? "" : "mt-16"}`}>
+      {!first && <span aria-hidden className="absolute bottom-full left-1/2 -z-10 h-[6.5rem] w-px bg-line" />}
+      <div className="year-box relative">
+        <span className="block px-10 py-1.5 font-serif text-3xl text-heading">{children}</span>
+      </div>
     </Reveal>
   );
 }
 
-function Card({ title, children }: { title: string; children: string }) {
+/** White-bordered photo. Lifts slightly on hover (hover-capable devices only). */
+function Photo({ src, alt, w, h, className = "", priority }: { src: string; alt: string; w: number; h: number; className?: string; priority?: boolean }) {
   return (
-    <div className="sage-panel relative p-8 text-center">
-      <h4 className="text-xl">{title}</h4>
-      <p className="mt-3 text-sm leading-relaxed text-white/90">{children}</p>
+    <div className={`collage-tile bg-card p-2.5 sm:p-3 ${className}`}>
+      <Image src={src} alt={alt} width={w} height={h} priority={priority} className="block h-auto w-full object-cover" />
     </div>
   );
 }
 
-function DateTag({ children }: { children: string }) {
-  return <span className="sage-panel relative inline-block px-6 py-2 font-serif text-lg">{children}</span>;
+function DateTag({ children, className = "" }: { children: string; className?: string }) {
+  return (
+    <div className={`collage-tile bg-card p-2.5 sm:p-3 ${className}`}>
+      <div className="accent-panel panel-double relative px-4 py-5 text-center font-serif text-xl sm:text-2xl">{children}</div>
+    </div>
+  );
 }
+
+function Card({ title, children, className = "" }: { title: string; children: ReactNode; className?: string }) {
+  return (
+    <div className={`collage-tile bg-card p-2.5 sm:p-3 ${className}`}>
+      <div className="accent-panel panel-double relative px-8 py-10 text-center sm:px-10">
+        <h4 className="text-2xl sm:text-[1.7rem]">{title}</h4>
+        <Mask src="/images/ourstory.svg" w={189} h={26} className="mx-auto my-4 w-32 text-on-accent/70" />
+        <p className="text-sm leading-relaxed text-on-accent/95">{children}</p>
+      </div>
+    </div>
+  );
+}
+
+/** Diamond ring with sparkle rays, drawn to match the template's icon. */
+function RingIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 80" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden className={className}>
+      <path d="M32 2v6M16 10l4 4M48 10l-4 4M6 24h6M52 24h6" />
+      <path d="M23 21h18l4 7-13 8-13-8z" />
+      <path d="M19 28l13 8 13-8" />
+      <circle cx="32" cy="58" r="17" />
+      <circle cx="32" cy="58" r="10" />
+    </svg>
+  );
+}
+
+function Leaf({ which, className }: { which: 1 | 2; className: string }) {
+  return which === 1 ? (
+    <Mask src="/images/detailsleaf.svg" w={857} h={585} className={`pointer-events-none absolute hidden max-w-none select-none text-line opacity-40 md:block ${className}`} />
+  ) : (
+    <Mask src="/images/detailsleaf2.svg" w={424} h={398} className={`pointer-events-none absolute hidden max-w-none select-none text-line opacity-40 md:block ${className}`} />
+  );
+}
+
 
 export function Story() {
   return (
     <>
-      <section id="our-story-title" className="edge-both relative -mb-16 bg-slate px-5 pb-28 pt-40 text-center text-white">
-        <h2 className="section-title !text-white">Our love story</h2>
-      </section>
+      <StoryTitle />
 
-      <section id="loveline" className="bg-white px-5 pb-24 pt-24">
-        <div className="relative mx-auto max-w-3xl">
-          <div aria-hidden className="absolute left-1/2 top-0 h-full w-px bg-sage/40" />
-
-          <div className="relative">
-            <Year>2018</Year>
-            <div className="grid items-start gap-6 md:grid-cols-2">
-              <Reveal from="right"><Image src="/images/timeline-first-date.jpg" alt="Isabella and Andrew walking on the beach" width={600} height={600} className="w-full object-cover" /></Reveal>
-              <Reveal from="left" delay={0.1} className="space-y-4 md:pt-12">
-                <DateTag>22 September</DateTag>
-                <Image src="/images/timeline-first-kiss.jpg" alt="Their first kiss" width={600} height={818} className="w-full object-cover" />
-              </Reveal>
-            </div>
-            <Reveal className="mx-auto -mt-10 max-w-sm md:-mt-24 md:mr-auto md:ml-8">
-              <Card title="Our first date & kiss">
-                Andrew was extremely nervous. He was afraid to expose his feelings to Isabella, but didn’t want to risk staying in the friend zone. So it was now or never!
-              </Card>
+      <section id="loveline" className="relative isolate overflow-hidden bg-paper px-5 pb-36 pt-20">
+        <div className="mx-auto max-w-4xl">
+          {/* 2018 */}
+          <Year first>2018</Year>
+          <Stage className="relative mt-16 flex flex-col gap-4 md:block md:aspect-[1132/920]">
+            <Leaf which={1} className="-right-40 -top-12 w-[34rem]" />
+            <Leaf which={2} className="-bottom-10 -left-52 w-[26rem]" />
+            <Reveal from="right" className="relative md:absolute md:left-0 md:top-0 md:w-[54.5%]">
+              <Depth d={-4}><Photo src="/images/timeline-first-date.jpg" alt="María y Malguin on the beach" w={600} h={600} /></Depth>
             </Reveal>
-          </div>
+            <Reveal from="left" delay={0.1} className="relative md:absolute md:left-[49.6%] md:top-[15.8%] md:w-[50.4%]">
+              <Depth d={6}><Photo src="/images/timeline-first-kiss.jpg" alt="Their first kiss" w={600} h={818} /></Depth>
+            </Reveal>
+            <Reveal from="fade" delay={0.25} className="relative z-10 self-start md:absolute md:left-[52%] md:top-[6%] md:w-[28.5%]">
+              <Depth d={3}><DateTag>22 September</DateTag></Depth>
+            </Reveal>
+            <Reveal delay={0.15} className="relative z-10 md:absolute md:left-[6%] md:top-[53%] md:w-[49%]">
+              <Depth d={-6}><Card title="Our first date & kiss">
+                Malguin was extremely nervous. He was afraid to expose his feelings to María, but didn’t want to risk staying in the friend zone.
+                So it was now or never! After all, María was the one. “It was about time!” she said. It was… PERFECT!
+              </Card></Depth>
+            </Reveal>
+          </Stage>
 
-          <div className="relative">
+          {/* 2019 */}
+          <div>
             <Year>2019</Year>
-            <div className="grid items-center gap-6 md:grid-cols-[1.4fr_1fr]">
-              <Reveal from="right"><Image src="/images/timeline-slider-img1.jpg" alt="Our vacations" width={1080} height={750} className="w-full object-cover" /></Reveal>
-              <Reveal delay={0.1}>
-                <Card title="Some of our most memorable moments">
-                  They had taken overnight trips before, but this was their first huge vacation outside the USA, travelling through the Baltic region together.
-                </Card>
+            <Stage className="relative mt-16 flex flex-col gap-4 md:block md:aspect-[100/50.8]">
+              <Leaf which={2} className="-left-56 top-0 w-[22rem] -scale-x-100" />
+              <Reveal from="right" className="relative md:absolute md:left-0 md:top-0 md:w-[58%]">
+                <Depth d={-3}><TimelineGallery /></Depth>
               </Reveal>
-            </div>
+              <Reveal delay={0.15} className="relative z-10 md:absolute md:left-[50%] md:top-[13%] md:w-[48%]">
+                <Depth d={5}><Card title="Some of our most memorable moments">
+                  They had taken overnight trips before, but this was their first huge vacation outside the USA. María and Malguin travelled to the
+                  Baltic region and visited a number of countries including Iceland, Finland, Denmark, Poland and Germany.
+                </Card></Depth>
+              </Reveal>
+            </Stage>
           </div>
 
-          <div className="relative">
+          {/* 2021 */}
+          <div>
             <Year>2021</Year>
-            <div className="grid items-start gap-6 md:grid-cols-2">
-              <Reveal from="right"><Image src="/images/timeline-proposal-img1.jpg" alt="The proposal" width={600} height={818} className="w-full object-cover" /></Reveal>
-              <Reveal from="left" delay={0.1} className="space-y-4">
-                <DateTag>15 July</DateTag>
-                <Image src="/images/timeline-proposal-img2.jpg" alt="The ring" width={600} height={800} className="w-full object-cover" />
+            <Stage className="relative mt-16 flex flex-col gap-4 md:block md:aspect-[100/101]">
+              <Leaf which={1} className="-right-44 top-[40%] w-[30rem]" />
+              <Reveal from="right" className="relative md:absolute md:left-0 md:top-[25%] md:w-[52%]">
+                <Depth d={-2}><Photo src="/images/timeline-proposal-img2.jpg" alt="The proposal" w={600} h={800} /></Depth>
               </Reveal>
-            </div>
-            <Reveal className="mx-auto -mt-10 max-w-sm">
-              <Card title="She said Yes!">
-                On a cruise off the shore of the Cayman Islands, Andrew’s nerves got the best of him, and he pulled Isabella back to the room and straight onto the balcony to ask the question.
-              </Card>
-            </Reveal>
+              <Reveal from="left" delay={0.1} className="relative md:absolute md:left-[50%] md:top-[3%] md:w-[50%]">
+                <Depth d={4}><Photo src="/images/timeline-proposal-img1.jpg" alt="The ring" w={600} h={818} /></Depth>
+              </Reveal>
+              <Reveal from="fade" delay={0.25} className="relative z-10 self-start md:absolute md:left-[58%] md:top-0 md:w-[30%]">
+                <Depth d={3}><DateTag>15 July</DateTag></Depth>
+              </Reveal>
+              <Reveal delay={0.15} className="relative z-10 md:absolute md:left-[36%] md:top-[60%] md:w-[55%]">
+                <Depth d={-5}><Card title="She said Yes!">
+                  On a cruise off the shore of the Cayman Islands, Malguin’s nerves got the best of him. He pulled María back to the room and
+                  straight onto the balcony, and asked the question. (YES!)
+                </Card></Depth>
+              </Reveal>
+            </Stage>
           </div>
 
-          <Reveal className="relative mt-20 bg-white py-4 text-center">
-            <p className="text-xs uppercase tracking-[0.3em]">This is where our</p>
-            <p className="font-serif text-5xl uppercase tracking-wide text-sage sm:text-6xl">Forever<br />begins!</p>
+          <Reveal className="relative mt-24 flex flex-col items-center text-center">
+            <span aria-hidden className="absolute bottom-full left-1/2 -z-10 h-[12.5rem] w-px bg-line" />
+            <RingIcon className="mt-5 w-14 text-line/60" />
+            <p className="mt-3 font-serif text-[clamp(1.2rem,2.4vw,1.75rem)] uppercase leading-none text-gold-ink">This is where our</p>
+            <p className="mt-3 font-serif text-[clamp(3.25rem,8.5vw,5.5rem)] font-bold uppercase leading-[0.92] text-gold-ink">
+              Forever<br />begins!
+            </p>
           </Reveal>
         </div>
       </section>

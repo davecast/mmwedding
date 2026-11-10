@@ -1,20 +1,103 @@
 @import "tailwindcss";
 
+/*
+ * Palette. These four are the brand colours; the light and dark schemes below are built from them
+ * (plus tints mixed from them), so nothing on the page is hard-coded.
+ */
 :root {
-  --sage: #8eaeba;
-  --sage-deep: #6b8794;
-  --slate: #3d5963;
-  --ink: #73777b;
-  --paper: #ffffff;
-  --mist: #f7f8fa;
+  --gold: #be921e;
+  --brown: #815e3e;
+  --navy: #242d43;
+  --sand: #ebd5b6;
+}
+
+/*
+ * Semantic roles. Components only ever read these.
+ *   paper / paper-alt / card   light (or dark) surfaces
+ *   ink / heading              body text and headings on those surfaces
+ *   line                       thin decoration on paper (frames, stems, ornaments)
+ *   accent / on-accent         filled panels and their text
+ *   deep / on-deep / line-deep dark sections (photo overlays, header, footer) and what sits on them
+ *   band / on-band             the quote strip
+ *   gold-ink                   gold dark enough for large display text on paper
+ */
+
+/* Light: Heirloom — ivory paper, navy sections, brown panels, gold band */
+:root {
+  --paper: color-mix(in srgb, var(--sand) 22%, white);
+  --paper-alt: color-mix(in srgb, var(--sand) 55%, white);
+  --card: color-mix(in srgb, var(--sand) 8%, white);
+  --ink: color-mix(in srgb, var(--navy) 78%, white);
+  --heading: var(--brown);
+  --line: var(--gold);
+  --gold-ink: color-mix(in srgb, var(--gold) 75%, var(--brown));
+  --accent: var(--brown);
+  --on-accent: color-mix(in srgb, var(--sand) 40%, white);
+  --deep: var(--navy);
+  --on-deep: color-mix(in srgb, var(--sand) 40%, white);
+  --line-deep: var(--gold);
+  --band: var(--gold);
+  --on-band: var(--navy);
+  --shadow: 36 45 67;
+}
+
+/* Dark: Midnight — navy paper, sand type, gold lines.
+ * Applies when the visitor picks it, or follows the system setting unless they picked light. */
+:root[data-theme="dark"] {
+  --paper: var(--navy);
+  --paper-alt: color-mix(in srgb, var(--navy) 93%, var(--sand));
+  --card: color-mix(in srgb, var(--navy) 89%, var(--sand));
+  --ink: var(--sand);
+  --heading: var(--gold);
+  --line: var(--gold);
+  --gold-ink: var(--gold);
+  --accent: var(--brown);
+  --on-accent: color-mix(in srgb, var(--sand) 40%, white);
+  --deep: color-mix(in srgb, var(--navy) 62%, black);
+  --on-deep: color-mix(in srgb, var(--sand) 40%, white);
+  --line-deep: var(--gold);
+  --band: var(--gold);
+  --on-band: var(--navy);
+  --shadow: 0 0 0;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: var(--navy);
+    --paper-alt: color-mix(in srgb, var(--navy) 93%, var(--sand));
+    --card: color-mix(in srgb, var(--navy) 89%, var(--sand));
+    --ink: var(--sand);
+    --heading: var(--gold);
+    --line: var(--gold);
+    --gold-ink: var(--gold);
+    --accent: var(--brown);
+    --on-accent: color-mix(in srgb, var(--sand) 40%, white);
+    --deep: color-mix(in srgb, var(--navy) 62%, black);
+    --on-deep: color-mix(in srgb, var(--sand) 40%, white);
+    --line-deep: var(--gold);
+    --band: var(--gold);
+    --on-band: var(--navy);
+    --shadow: 0 0 0;
+    color-scheme: dark;
+  }
 }
 
 @theme inline {
-  --color-sage: var(--sage);
-  --color-sage-deep: var(--sage-deep);
-  --color-slate: var(--slate);
+  --color-gold: var(--gold);
+  --color-paper: var(--paper);
+  --color-paper-alt: var(--paper-alt);
+  --color-card: var(--card);
   --color-ink: var(--ink);
-  --color-mist: var(--mist);
+  --color-heading: var(--heading);
+  --color-line: var(--line);
+  --color-gold-ink: var(--gold-ink);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-deep: var(--deep);
+  --color-on-deep: var(--on-deep);
+  --color-line-deep: var(--line-deep);
+  --color-band: var(--band);
+  --color-on-band: var(--on-band);
   --font-sans: var(--font-poppins), system-ui, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
@@ -23,6 +106,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
+  color-scheme: light;
+  scrollbar-color: var(--line) var(--paper-alt);
 }
 
 body {
@@ -32,6 +117,8 @@ body {
   font-weight: 300;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip; /* decorative leaves and overlapping cards may bleed past the edge */
+  transition: background-color 400ms var(--ease-out-quart), color 400ms var(--ease-out-quart);
 }
 
 h1, h2, h3, h4, h5 {
@@ -43,66 +130,161 @@ h1, h2, h3, h4, h5 {
 
 p { text-wrap: pretty; }
 
+/* Browser surfaces take the palette too */
+::selection { background: var(--gold); color: var(--navy); }
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+input, select, textarea { caret-color: var(--gold-ink); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  body { transition: none; }
 }
 
 /* Slanted section edges, as in the Neela template */
 .edge-bottom { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - clamp(40px, 7vw, 110px))); }
+.edge-slide-top { clip-path: polygon(0 0, 100% clamp(40px, 7vw, 110px), 100% 100%, 0 100%); }
 .edge-top { clip-path: polygon(0 clamp(40px, 7vw, 110px), 100% 0, 100% 100%, 0 100%); }
 .edge-both { clip-path: polygon(0 clamp(40px, 7vw, 110px), 100% 0, 100% calc(100% - clamp(40px, 7vw, 110px)), 0 100%); }
 
-/* The framed card used for all "neela-style" panels */
+/* Wedge, as in the template: top edge rises to the right, bottom edge falls to the right */
+.edge-wedge {
+  clip-path: polygon(0 clamp(50px, 9vw, 130px), 100% 0, 100% 100%, 0 calc(100% - clamp(55px, 10.5vw, 150px)));
+}
+
+/* The framed card used for the light "neela-style" panels */
 .framed {
   position: relative;
-  background: #fff;
-  box-shadow: 0 20px 50px -25px rgb(61 89 99 / 0.35);
+  background: var(--card);
+  box-shadow: 0 20px 50px -25px rgb(var(--shadow) / 0.35);
 }
 .framed::before {
   content: "";
   position: absolute;
   inset: 8px;
-  border: 1px solid color-mix(in srgb, var(--sage) 45%, white);
+  border: 1px solid color-mix(in srgb, var(--line) 45%, var(--card));
   pointer-events: none;
 }
 
-.sage-panel {
-  background: var(--sage);
-  color: #fff;
-  box-shadow: 0 20px 50px -25px rgb(61 89 99 / 0.5);
+/* Second, offset frame: two thin rectangles crossing, as in the template */
+.framed-double::before { inset: 32px 27px; }
+.framed-double::after {
+  content: "";
+  position: absolute;
+  inset: 21px 38px;
+  border: 1px solid color-mix(in srgb, var(--line) 45%, var(--card));
+  pointer-events: none;
 }
-.sage-panel::before {
+
+/* Hover card on the wedding-party photos: two thin crossing frames */
+.member-card::before,
+.member-card::after {
+  content: "";
+  position: absolute;
+  border: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  pointer-events: none;
+}
+.member-card::before { inset: 18px 26px; }
+.member-card::after { inset: 26px 18px; }
+
+/* Timeline collage */
+.collage-tile {
+  box-shadow: 0 22px 44px -26px rgb(var(--shadow) / 0.5);
+}
+
+.year-box {
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.year-box::before {
+  content: "";
+  position: absolute;
+  inset: 9px -9px -9px 9px;
+  border: 1px solid color-mix(in srgb, var(--line) 55%, var(--paper));
+  pointer-events: none;
+}
+.year-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 9px);
+  height: calc(4rem - 9px);
+  width: 1px;
+  background: var(--line);
+}
+
+.year-box-plain::after { display: none; }
+
+.accent-panel.panel-double::before { inset: 10px 14px; }
+.accent-panel.panel-double::after {
+  content: "";
+  position: absolute;
+  inset: 5px 22px;
+  border: 1px solid color-mix(in srgb, var(--on-accent) 30%, transparent);
+  pointer-events: none;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--on-deep);
+  background: color-mix(in srgb, var(--deep) 55%, transparent);
+  transition: background-color 180ms var(--ease-out-quart), transform 160ms var(--ease-out-quart);
+  cursor: pointer;
+}
+.slider-btn:hover { background: color-mix(in srgb, var(--deep) 80%, transparent); }
+.slider-btn:active { transform: scale(0.94); }
+
+.accent-panel {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 20px 50px -25px rgb(var(--shadow) / 0.5);
+}
+.accent-panel::before {
   content: "";
   position: absolute;
   inset: 8px;
-  border: 1px solid rgb(255 255 255 / 0.45);
+  border: 1px solid color-mix(in srgb, var(--on-accent) 45%, transparent);
   pointer-events: none;
 }
 
+/* Button: two crossing frames at rest; on hover they collapse into one filled box */
 .btn {
+  position: relative;
   display: inline-block;
-  padding: 0.75rem 2rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  background: var(--sage);
-  color: #fff;
-  border: 1px solid var(--sage);
-  transition: background-color 180ms var(--ease-out-quart), color 180ms var(--ease-out-quart), transform 160ms var(--ease-out-quart);
-}
-.btn:hover { background: transparent; color: var(--sage-deep); }
-.btn:active { transform: scale(0.97); }
-
-.section-title {
+  padding: 0.8rem 2.75rem;
   font-family: var(--font-serif);
-  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-  text-align: center;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--heading);
+  background: transparent;
+  border: 0;
+  transition: background-color 300ms var(--ease-out-quart), color 300ms var(--ease-out-quart), transform 160ms var(--ease-out-quart);
 }
-.section-title::after {
-  content: "♥";
-  display: block;
-  margin: 0.75rem auto 0;
-  font-size: 0.8rem;
-  color: var(--sage);
-  opacity: 0.8;
+.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  border: 1px solid var(--line);
+  pointer-events: none;
+  transition: inset 300ms var(--ease-out-quart);
+}
+.btn::before { inset: -8px 0; }
+.btn::after { inset: 0 -8px; }
+.btn:hover,
+.btn:focus-visible { background-color: color-mix(in srgb, var(--line) 12%, transparent); }
+.btn:hover::before,
+.btn:hover::after,
+.btn:focus-visible::before,
+.btn:focus-visible::after { inset: 0; }
+.btn:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn::before, .btn::after { transition: none; }
 }
