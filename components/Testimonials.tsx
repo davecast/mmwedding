@@ -1,24 +1,29 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import type { Blessing } from "@/lib/rsvp-schema";
 import { Mask } from "./Mask";
+import { BLESSINGS_UPDATED } from "./RsvpForm";
 
-const quotes = [
+type Quote = { text: string; name: string; role: string };
+
+/** Shown until the first guest leaves a blessing. */
+const sampleQuotes: Quote[] = [
   {
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius ante libero, a sollicitudin elit malesuada et. Nulla facilisi. Pellentesque magna diam, mattis a gravida eget, lobortis ut velit. Nam interdum hendrerit nisl et malesuada. Nulla facilisis velit neque, sed ultrices nibh facilisis non.",
     name: "John Doe",
-    role: "Best Man",
+    role: "Padrino principal",
   },
   {
     text: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.",
     name: "Emily Garcia",
-    role: "Maid of Honour",
+    role: "Dama de honor principal",
   },
   {
     text: "Aenean aliquam augue turpis, in tempor elit condimentum sit amet. Phasellus a sapien tincidunt nunc dapibus mollis. Etiam ultricies bibendum sodales. Nulla libero tortor, auctor at elit ut, pharetra placerat libero.",
     name: "Rachel Harris",
-    role: "Bridesmaid",
+    role: "Dama de honor",
   },
 ];
 
@@ -29,19 +34,47 @@ export function Testimonials() {
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [live, setLive] = useState<Quote[]>([]);
+
+  // The words of blessing guests left in the RSVP form, newest first
+  const load = useCallback(() => {
+    fetch("/api/blessings", { cache: "no-store" })
+      .then((r) => r.json() as Promise<{ blessings?: Blessing[] }>)
+      .then(({ blessings = [] }) => {
+        setLive(
+          blessings.map((b) => ({
+            text: b.blessing,
+            name: b.name,
+            role: b.attend === "yes" ? "Nos acompañará en la boda" : "Nos acompaña a la distancia",
+          })),
+        );
+        setI(0);
+      })
+      .catch(() => {
+        /* keep whatever is showing */
+      });
+  }, []);
 
   useEffect(() => {
-    if (reduce || paused) return;
+    load();
+    window.addEventListener(BLESSINGS_UPDATED, load);
+    return () => window.removeEventListener(BLESSINGS_UPDATED, load);
+  }, [load]);
+
+  const quotes = live.length ? live : sampleQuotes;
+
+  useEffect(() => {
+    if (reduce || paused || quotes.length < 2) return;
     const id = setInterval(() => setI((v) => (v + 1) % quotes.length), 7000);
     return () => clearInterval(id);
-  }, [reduce, paused]);
+  }, [reduce, paused, quotes.length]);
 
-  const q = quotes[i];
+  const q = quotes[i % quotes.length];
 
   return (
     <section
       aria-roledescription="carousel"
-      aria-label="Words from the wedding party"
+      aria-label="Palabras del cortejo nupcial"
       className="relative overflow-hidden bg-band px-5 py-20 text-center text-on-band"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -77,7 +110,7 @@ export function Testimonials() {
           <button
             key={n}
             onClick={() => setI(n)}
-            aria-label={`Show quote ${n + 1} of ${quotes.length}`}
+            aria-label={`Mostrar cita ${n + 1} de ${quotes.length}`}
             aria-current={n === i}
             className="group grid h-6 w-9 cursor-pointer place-items-center"
           >
