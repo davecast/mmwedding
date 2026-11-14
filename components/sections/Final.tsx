@@ -39,7 +39,7 @@ export function Footer() {
   return (
     <footer className="bg-deep px-5 pt-16 text-center text-sm text-on-deep/80">
       <div className="mx-auto grid max-w-5xl items-center gap-8 md:grid-cols-3">
-        <p className="md:text-left">Viernes, 24 de septiembre de 2027, 3:00 p. m.<br />4181 Birchwood Ave, Seal Beach, CA</p>
+        <p className="md:text-left">Viernes, 18 de diciembre de 2026, 3:00 p. m.<br />4181 Birchwood Ave, Seal Beach, CA</p>
         <p className="font-serif text-3xl leading-tight text-on-deep">Marguin<br /><small className="text-lg italic text-line-deep">&amp;</small><br />María</p>
         <p className="md:text-right">Tel.: <a href="tel:+584143607801" className="underline decoration-line-deep/60 underline-offset-4 transition-colors hover:text-on-deep">+58 414 360 7801</a><br /><a href="mailto:losbracciobodas@gmail.com" className="underline decoration-line-deep/60 underline-offset-4 transition-colors hover:text-on-deep">losbracciobodas@gmail.com</a></p>
       </div>

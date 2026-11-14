@@ -40,7 +40,7 @@ export function Invitation() {
 
             <div className="relative my-5 py-10 font-serif">
               <Mask src="/images/separatostop.svg" w={126} h={17} className="absolute left-1/2 top-0 w-32 -translate-x-1/2 text-on-accent" />
-              <p className="text-[clamp(1.5rem,2.6vw,2rem)] font-medium">24 de septiembre de 2027</p>
+              <p className="text-[clamp(1.5rem,2.6vw,2rem)] font-medium">18 de diciembre de 2026</p>
               <p className="text-xl">a las 3:00 p. m.</p>
               <Mask src="/images/separatostop.svg" w={126} h={17} className="absolute bottom-0 left-1/2 w-32 -translate-x-1/2 -scale-y-100 text-on-accent" />
             </div>
