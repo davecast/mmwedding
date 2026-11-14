@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Mask } from "../Mask";
+import { GalleryStrip } from "../GalleryStrip";
 import { Reveal } from "../Reveal";
 import { RsvpForm } from "../RsvpForm";
 
@@ -8,12 +8,9 @@ export function Gallery() {
     <section id="gallery" className="bg-paper pt-24">
       <h2 className="text-center font-serif text-[clamp(1.9rem,3.2vw,2.6rem)] text-heading">Galería de la boda</h2>
       <Mask src="/images/ourstory.svg" w={189} h={26} className="mx-auto mt-4 w-[189px] text-line" />
-      <div className="mt-12 flex snap-x gap-2 overflow-x-auto px-2 pb-4 [scrollbar-width:thin]">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
-          <a key={n} href={`/images/gallery-img${n}.jpg`} target="_blank" rel="noreferrer" className="group relative block shrink-0 snap-start overflow-hidden">
-            <Image src={`/images/gallery-thumb${n}.jpg`} alt={`Foto de la boda ${n}`} width={635} height={635} className="h-72 w-auto object-cover transition-transform duration-500 ease-out group-hover:scale-105 sm:h-96" />
-          </a>
-        ))}
+      <GalleryStrip />
+      <div className="mt-6 text-center">
+        <a href="/nuestra-boda" className="btn">Sube tus fotos</a>
       </div>
     </section>
   );

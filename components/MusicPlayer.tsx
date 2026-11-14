@@ -64,6 +64,7 @@ export function MusicPlayer() {
       ch?.removeEventListener("message", yieldToOther);
       window.removeEventListener("pagehide", yieldToOther);
       ch?.close();
+      a.pause(); // leaving the home page (e.g. to the photo page) stops the song
     };
   }, []);
 

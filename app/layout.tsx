@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
-import { MusicPlayer } from "@/components/MusicPlayer";
-import { Preloader } from "@/components/Preloader";
 import { THEME_BOOT_SCRIPT } from "@/components/ThemeToggle";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -20,9 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
       </head>
       <body>
-        <Preloader />
         {children}
-        <MusicPlayer />
       </body>
     </html>
   );
