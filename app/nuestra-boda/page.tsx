@@ -6,6 +6,7 @@ import { PhotoUpload } from "@/components/PhotoUpload";
 export const metadata: Metadata = {
   title: "Comparte tus fotos — Marguin & María",
   description: "Sube tus fotos de la boda de Marguin y María para que aparezcan en nuestra galería.",
+  robots: { index: false, follow: false }, // reached by QR code only
 };
 
 export default function OurWedding() {

@@ -2,3 +2,8 @@
 export function photoUrl(cloudName: string, id: string, width: number) {
   return `https://res.cloudinary.com/${cloudName}/image/upload/c_limit,w_${width},f_auto,q_auto/${id}`;
 }
+
+/** Link that makes the browser download the original photo instead of opening it. */
+export function photoDownloadUrl(cloudName: string, id: string) {
+  return `https://res.cloudinary.com/${cloudName}/image/upload/fl_attachment/${id}`;
+}

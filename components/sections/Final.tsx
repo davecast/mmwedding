@@ -1,17 +1,14 @@
 import { Mask } from "../Mask";
-import { GalleryStrip } from "../GalleryStrip";
+import { GalleryGrid } from "../GalleryGrid";
 import { Reveal } from "../Reveal";
 import { RsvpForm } from "../RsvpForm";
 
 export function Gallery() {
   return (
-    <section id="gallery" className="bg-paper pt-24">
+    <section id="gallery" className="bg-paper pb-16 pt-24">
       <h2 className="text-center font-serif text-[clamp(1.9rem,3.2vw,2.6rem)] text-heading">Galería de la boda</h2>
       <Mask src="/images/ourstory.svg" w={189} h={26} className="mx-auto mt-4 w-[189px] text-line" />
-      <GalleryStrip />
-      <div className="mt-6 text-center">
-        <a href="/nuestra-boda" className="btn">Sube tus fotos</a>
-      </div>
+      <GalleryGrid />
     </section>
   );
 }
