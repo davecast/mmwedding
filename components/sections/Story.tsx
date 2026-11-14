@@ -82,18 +82,18 @@ export function Story() {
             <Leaf which={1} className="-right-40 -top-12 w-[34rem]" />
             <Leaf which={2} className="-bottom-10 -left-52 w-[26rem]" />
             <Reveal from="right" className="relative md:absolute md:left-0 md:top-0 md:w-[54.5%]">
-              <Depth d={-4}><Photo src="/images/timeline-first-date.jpg" alt="María y Malguin on the beach" w={600} h={600} /></Depth>
+              <Depth d={-4}><Photo src="/images/timeline-first-date.jpg" alt="Marguin y María en la playa" w={600} h={600} /></Depth>
             </Reveal>
             <Reveal from="left" delay={0.1} className="relative md:absolute md:left-[49.6%] md:top-[15.8%] md:w-[50.4%]">
-              <Depth d={6}><Photo src="/images/timeline-first-kiss.jpg" alt="Their first kiss" w={600} h={818} /></Depth>
+              <Depth d={6}><Photo src="/images/timeline-first-kiss.jpg" alt="Su primer beso" w={600} h={818} /></Depth>
             </Reveal>
             <Reveal from="fade" delay={0.25} className="relative z-10 self-start md:absolute md:left-[52%] md:top-[6%] md:w-[28.5%]">
-              <Depth d={3}><DateTag>22 September</DateTag></Depth>
+              <Depth d={3}><DateTag>22 de septiembre</DateTag></Depth>
             </Reveal>
             <Reveal delay={0.15} className="relative z-10 md:absolute md:left-[6%] md:top-[53%] md:w-[49%]">
-              <Depth d={-6}><Card title="Our first date & kiss">
-                Malguin was extremely nervous. He was afraid to expose his feelings to María, but didn’t want to risk staying in the friend zone.
-                So it was now or never! After all, María was the one. “It was about time!” she said. It was… PERFECT!
+              <Depth d={-6}><Card title="Nuestra primera cita y nuestro primer beso">
+                Marguin estaba muy nervioso. Temía mostrar sus sentimientos a María, pero no quería quedarse en la zona de amigos.
+                ¡Era ahora o nunca! Después de todo, María era la indicada. «¡Ya era hora!», dijo ella. Fue… ¡PERFECTO!
               </Card></Depth>
             </Reveal>
           </Stage>
@@ -107,9 +107,9 @@ export function Story() {
                 <Depth d={-3}><TimelineGallery /></Depth>
               </Reveal>
               <Reveal delay={0.15} className="relative z-10 md:absolute md:left-[50%] md:top-[13%] md:w-[48%]">
-                <Depth d={5}><Card title="Some of our most memorable moments">
-                  They had taken overnight trips before, but this was their first huge vacation outside the USA. María and Malguin travelled to the
-                  Baltic region and visited a number of countries including Iceland, Finland, Denmark, Poland and Germany.
+                <Depth d={5}><Card title="Algunos de nuestros momentos más memorables">
+                  Ya habían hecho escapadas de una noche, pero estas fueron sus primeras grandes vacaciones fuera de Estados Unidos. María y Marguin
+                  recorrieron la región del Báltico y visitaron varios países, entre ellos Islandia, Finlandia, Dinamarca, Polonia y Alemania.
                 </Card></Depth>
               </Reveal>
             </Stage>
@@ -121,18 +121,18 @@ export function Story() {
             <Stage className="relative mt-16 flex flex-col gap-4 md:block md:aspect-[100/101]">
               <Leaf which={1} className="-right-44 top-[40%] w-[30rem]" />
               <Reveal from="right" className="relative md:absolute md:left-0 md:top-[25%] md:w-[52%]">
-                <Depth d={-2}><Photo src="/images/timeline-proposal-img2.jpg" alt="The proposal" w={600} h={800} /></Depth>
+                <Depth d={-2}><Photo src="/images/timeline-proposal-img2.jpg" alt="La propuesta" w={600} h={800} /></Depth>
               </Reveal>
               <Reveal from="left" delay={0.1} className="relative md:absolute md:left-[50%] md:top-[3%] md:w-[50%]">
-                <Depth d={4}><Photo src="/images/timeline-proposal-img1.jpg" alt="The ring" w={600} h={818} /></Depth>
+                <Depth d={4}><Photo src="/images/timeline-proposal-img1.jpg" alt="El anillo" w={600} h={818} /></Depth>
               </Reveal>
               <Reveal from="fade" delay={0.25} className="relative z-10 self-start md:absolute md:left-[58%] md:top-0 md:w-[30%]">
-                <Depth d={3}><DateTag>15 July</DateTag></Depth>
+                <Depth d={3}><DateTag>15 de julio</DateTag></Depth>
               </Reveal>
               <Reveal delay={0.15} className="relative z-10 md:absolute md:left-[36%] md:top-[60%] md:w-[55%]">
-                <Depth d={-5}><Card title="She said Yes!">
-                  On a cruise off the shore of the Cayman Islands, Malguin’s nerves got the best of him. He pulled María back to the room and
-                  straight onto the balcony, and asked the question. (YES!)
+                <Depth d={-5}><Card title="¡Dijo que sí!">
+                  En un crucero frente a las costas de las Islas Caimán, los nervios le ganaron a Marguin. Llevó a María de vuelta al camarote y
+                  directo al balcón, y le hizo la pregunta. (¡SÍ!)
                 </Card></Depth>
               </Reveal>
             </Stage>
@@ -141,9 +141,9 @@ export function Story() {
           <Reveal className="relative mt-24 flex flex-col items-center text-center">
             <span aria-hidden className="absolute bottom-full left-1/2 -z-10 h-[12.5rem] w-px bg-line" />
             <RingIcon className="mt-5 w-14 text-line/60" />
-            <p className="mt-3 font-serif text-[clamp(1.2rem,2.4vw,1.75rem)] uppercase leading-none text-gold-ink">This is where our</p>
+            <p className="mt-3 font-serif text-[clamp(1.2rem,2.4vw,1.75rem)] uppercase leading-none text-gold-ink">Aquí comienza nuestro</p>
             <p className="mt-3 font-serif text-[clamp(3.25rem,8.5vw,5.5rem)] font-bold uppercase leading-[0.92] text-gold-ink">
-              Forever<br />begins!
+              Para<br />siempre
             </p>
           </Reveal>
         </div>

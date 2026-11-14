@@ -83,7 +83,7 @@ export function MusicPlayer() {
     <button
       onClick={toggle}
       aria-pressed={playing}
-      aria-label={playing ? "Pause background music" : "Play background music"}
+      aria-label={playing ? "Pausar la música de fondo" : "Reproducir la música de fondo"}
       className="fixed bottom-5 right-5 z-[60] grid size-12 cursor-pointer place-items-center rounded-full bg-deep text-on-deep shadow-[0_14px_30px_-10px_rgb(0_0_0/0.55)] ring-1 ring-line-deep/60 transition-transform duration-150 ease-out hover:scale-105 active:scale-95 max-sm:bottom-4 max-sm:right-4"
     >
       <SoundIcon on={playing} />

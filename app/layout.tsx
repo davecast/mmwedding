@@ -9,13 +9,13 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400"], variable: "--font-poppins" });
 
 export const metadata: Metadata = {
-  title: "María & Malguin — We're getting married",
-  description: "Join us to celebrate the wedding of María & Malguin.",
+  title: "Marguin & María — ¡Nos casamos!",
+  description: "Acompáñanos a celebrar la boda de Marguin & María.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="es" className={`${playfair.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
       </head>

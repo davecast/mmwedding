@@ -75,7 +75,7 @@ export function Preloader() {
         <motion.div
           id="preloader"
           role="status"
-          aria-label="Loading"
+          aria-label="Cargando"
           className="fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-deep text-line-deep"
           exit={{ opacity: 0, scale: 1.04, filter: "blur(10px)" }}
           transition={{ duration: 1, ease: [0.25, 1, 0.5, 1] }}
@@ -100,7 +100,7 @@ export function Preloader() {
             ))}
 
           <div className="relative text-center text-on-deep">
-            <p className="font-serif text-4xl sm:text-5xl">María <span className="italic text-line-deep">&amp;</span> Malguin</p>
+            <p className="font-serif text-4xl sm:text-5xl">Marguin <span className="italic text-line-deep">&amp;</span> María</p>
             {needsTap ? (
               <button
                 onClick={() => {
@@ -110,10 +110,10 @@ export function Preloader() {
                 className="btn mt-8 cursor-pointer text-on-deep! text-base"
                 autoFocus
               >
-                Enter
+                Entrar
               </button>
             ) : (
-              <p className="mt-3 text-[11px] uppercase tracking-[0.35em] opacity-70">Getting ready</p>
+              <p className="mt-3 text-[11px] uppercase tracking-[0.35em] opacity-70">Preparando todo</p>
             )}
           </div>
         </motion.div>

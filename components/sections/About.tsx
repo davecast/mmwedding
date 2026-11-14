@@ -3,12 +3,12 @@ import { Reveal } from "../Reveal";
 import { Mask } from "../Mask";
 
 const people = [
-  { name: "Malguin", role: "The Groom", img: "/images/groom.jpg", side: "left" },
-  { name: "María", role: "The Bride", img: "/images/bride.jpg", side: "right" },
+  { name: "Marguin", role: "El novio", img: "/images/groom.jpg", side: "left" },
+  { name: "María", role: "La novia", img: "/images/bride.jpg", side: "right" },
 ] as const;
 
 const quote =
-  "Someone once told me that “when you meet the right person, you’ll know.” Well, I just knew. Right away, we connected in a way that left me feeling complete.";
+  "Alguien me dijo una vez que «cuando conoces a la persona indicada, lo sabes». Pues yo simplemente lo supe: desde el primer momento conectamos de una forma que me hizo sentir plenitud.";
 
 export function About() {
   return (
@@ -18,7 +18,7 @@ export function About() {
 
       <div className="relative mx-auto max-w-5xl">
         <Reveal from="fade" delay={0.1}>
-          <h2 className="text-center font-serif text-[clamp(1.9rem,3.2vw,2.6rem)] text-heading">He asked her &amp; she said yes!</h2>
+          <h2 className="text-center font-serif text-[clamp(1.9rem,3.2vw,2.6rem)] text-heading">¡Él se lo pidió y ella dijo que sí!</h2>
           <p className="mx-auto mt-8 max-w-3xl text-center text-sm">
             Aenean aliquam augue turpis, in tempor elit condimentum sit amet. Phasellus a sapien tincidunt nunc dapibus mollis.
             Etiam ultricies bibendum sodales. Nulla libero tortor, auctor at elit ut, pharetra placerat libero. Aenean gravida

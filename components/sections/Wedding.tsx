@@ -13,7 +13,7 @@ export function Invitation() {
       overlay="bg-deep/65"
       className="edge-both px-5 pb-64 pt-44 text-on-deep"
     >
-      <h2 className="text-center font-serif text-[clamp(2rem,3.6vw,3rem)]">Invitation</h2>
+      <h2 className="text-center font-serif text-[clamp(2rem,3.6vw,3rem)]">Invitación</h2>
       <Mask src="/images/ourstory.svg" w={189} h={26} className="mx-auto mt-4 w-[189px] text-line-deep" />
 
       <Reveal from="right" className="mx-auto mt-16 max-w-[880px]">
@@ -23,30 +23,30 @@ export function Invitation() {
           <span aria-hidden className="pointer-events-none absolute -bottom-2.5 left-0 -right-2.5 top-0 border border-on-deep" />
 
           <div className="relative flex items-center justify-center overflow-hidden px-5 py-8 md:w-[48%]">
-            <div className="relative px-10 py-20 font-serif text-[clamp(4.5rem,9vw,7.5rem)] leading-[0.85] md:px-14 md:py-24">
+            <div className="relative px-10 py-20 font-serif text-[clamp(4rem,8vw,6.5rem)] leading-[0.85] md:px-14 md:py-24">
               <Mask src="/images/invite-sprig.svg" w={173} h={154} className="pointer-events-none absolute right-2 top-4 w-24 max-w-none md:w-28 text-line-deep" />
               <Mask src="/images/invite-sprig.svg" w={173} h={154} className="pointer-events-none absolute bottom-0 left-0 w-24 max-w-none rotate-180 md:w-28 text-line-deep" />
-              <span className="relative block">Save</span>
-              <small className="relative block py-2 font-serif text-[1.35rem] uppercase leading-none tracking-normal">the</small>
-              <span className="relative block">Date</span>
+              <span className="relative block">Anota</span>
+              <small className="relative block py-2 font-serif text-[1.35rem] uppercase leading-none tracking-normal">la</small>
+              <span className="relative block">fecha</span>
             </div>
           </div>
 
           <div className="flex flex-col bg-accent/85 px-8 py-10 text-on-accent md:w-[52%]">
             <h3 className="font-serif text-[clamp(1.9rem,3.2vw,2.5rem)] text-on-accent">
-              María <small className="text-[0.55em] italic">&amp;</small> Malguin
+              Marguin <small className="text-[0.55em] italic">&amp;</small> María
             </h3>
-            <p className="mx-auto mt-2 max-w-sm text-[13px] uppercase leading-relaxed">Request the honor of your presence on their wedding day</p>
+            <p className="mx-auto mt-2 max-w-sm text-[13px] uppercase leading-relaxed">Tienen el honor de invitarte a su boda</p>
 
             <div className="relative my-5 py-10 font-serif">
               <Mask src="/images/separatostop.svg" w={126} h={17} className="absolute left-1/2 top-0 w-32 -translate-x-1/2 text-on-accent" />
-              <p className="text-[clamp(1.5rem,2.6vw,2rem)] font-medium">September 24, 2027</p>
-              <p className="text-xl">at 3:00 pm</p>
+              <p className="text-[clamp(1.5rem,2.6vw,2rem)] font-medium">24 de septiembre de 2027</p>
+              <p className="text-xl">a las 3:00 p. m.</p>
               <Mask src="/images/separatostop.svg" w={126} h={17} className="absolute bottom-0 left-1/2 w-32 -translate-x-1/2 -scale-y-100 text-on-accent" />
             </div>
 
-            <p className="text-[13px] uppercase leading-relaxed">At Birchwood Church<br />4181 Birchwood Ave Seal Beach, CA</p>
-            <p className="mt-3 font-serif text-xl">Reception to follow</p>
+            <p className="text-[13px] uppercase leading-relaxed">En la Iglesia Birchwood<br />4181 Birchwood Ave Seal Beach, CA</p>
+            <p className="mt-3 font-serif text-xl">Recepción a continuación</p>
           </div>
         </div>
       </Reveal>
@@ -55,14 +55,14 @@ export function Invitation() {
 }
 
 const events = [
-  { title: "Ceremony", time: "3:00pm", Icon: ChurchIcon, place: "Birchwood Church", addr: "4181 Birchwood Ave Seal Beach, CA", coords: "33.776825, -118.059113" },
-  { title: "Reception", time: "5:30pm", Icon: ChampagneIcon, place: "Old Ranch Country Club", addr: "29033 West Lake Drive, Agoura Hills, CA", coords: "33.776025, -118.065314" },
+  { title: "Ceremonia", time: "3:00 p. m.", Icon: ChurchIcon, place: "Iglesia Birchwood", addr: "4181 Birchwood Ave Seal Beach, CA", coords: "33.776825, -118.059113" },
+  { title: "Recepción", time: "5:30 p. m.", Icon: ChampagneIcon, place: "Old Ranch Country Club", addr: "29033 West Lake Drive, Agoura Hills, CA", coords: "33.776025, -118.065314" },
 ];
 
 export function Location() {
   return (
     <section id="location" className="bg-paper px-5 pb-28 pt-24">
-      <h2 className="text-center font-serif text-[clamp(2.25rem,4.4vw,3.5rem)] text-heading">Location</h2>
+      <h2 className="text-center font-serif text-[clamp(2.25rem,4.4vw,3.5rem)] text-heading">Ubicación</h2>
       <Mask src="/images/ourstory.svg" w={189} h={26} className="mx-auto mt-4 w-[189px] text-line" />
 
       <div className="mx-auto mt-16 flex max-w-6xl flex-col md:flex-row md:items-start">
@@ -88,7 +88,7 @@ export function Location() {
         <Reveal from="left" delay={0.1} className="mt-8 md:-ml-[14.7%] md:mt-0 md:flex md:w-[78%] md:flex-col md:self-stretch">
           {/* Static map: pointer events off so it never captures scroll or drag */}
           <iframe
-            title="Map of Birchwood Church, Seal Beach"
+            title="Mapa de la Iglesia Birchwood, Seal Beach"
             tabIndex={-1}
             className="pointer-events-none aspect-[1338/797] w-full border-0 grayscale-[0.6] sepia-[0.15]"
             src="https://www.openstreetmap.org/export/embed.html?bbox=-118.08%2C33.76%2C-118.04%2C33.79&layer=mapnik&marker=33.776825%2C-118.059113"
@@ -102,7 +102,7 @@ export function Location() {
 
       <Reveal className="flex flex-col items-center">
         <span aria-hidden className="h-16 w-px bg-line md:h-12" />
-        <a href="#rsvp" className="btn mt-2">RSVP</a>
+        <a href="#rsvp" className="btn mt-2">Confirmar asistencia</a>
       </Reveal>
     </section>
   );
@@ -111,19 +111,19 @@ export function Location() {
 type Member = { img: string; name: string; role: string };
 
 const bridesmaids: Member[] = [
-  { img: "bridesmaids-img1", name: "Emily Garcia", role: "Maid of honour" },
-  { img: "bridesmaids-img2", name: "Rachel Harris", role: "Bridesmaid" },
-  { img: "bridesmaids-img3", name: "Sarah Williams", role: "Bridesmaid" },
-  { img: "bridesmaids-img1", name: "Olivia Martin", role: "Bridesmaid" },
-  { img: "bridesmaids-img2", name: "Sophia Clark", role: "Bridesmaid" },
-  { img: "bridesmaids-img3", name: "Grace Turner", role: "Bridesmaid" },
+  { img: "bridesmaids-img1", name: "Emily Garcia", role: "Dama de honor principal" },
+  { img: "bridesmaids-img2", name: "Rachel Harris", role: "Dama de honor" },
+  { img: "bridesmaids-img3", name: "Sarah Williams", role: "Dama de honor" },
+  { img: "bridesmaids-img1", name: "Olivia Martin", role: "Dama de honor" },
+  { img: "bridesmaids-img2", name: "Sophia Clark", role: "Dama de honor" },
+  { img: "bridesmaids-img3", name: "Grace Turner", role: "Dama de honor" },
 ];
 
 const groomsmen: Member[] = [
-  { img: "groomsmen-img1", name: "Michael Scott", role: "Best man" },
-  { img: "groomsmen-img2", name: "Daniel Wright", role: "Groomsman" },
-  { img: "groomsmen-img3", name: "Ryan Anderson", role: "Groomsman" },
-  { img: "groomsmen-img1", name: "Lucas Bennett", role: "Groomsman" },
+  { img: "groomsmen-img1", name: "Michael Scott", role: "Padrino principal" },
+  { img: "groomsmen-img2", name: "Daniel Wright", role: "Caballero de honor" },
+  { img: "groomsmen-img3", name: "Ryan Anderson", role: "Caballero de honor" },
+  { img: "groomsmen-img1", name: "Lucas Bennett", role: "Caballero de honor" },
 ];
 
 function Heading({ children }: { children: string }) {
@@ -180,7 +180,7 @@ export function Party() {
         overlay="bg-deep/60"
         className="px-5 pb-24 pt-24 text-on-deep"
       >
-        <Heading>Bridesmaids</Heading>
+        <Heading>Damas de honor</Heading>
         <Grid people={bridesmaids} cols="lg:grid-cols-3" />
       </ParallaxSection>
 
@@ -192,7 +192,7 @@ export function Party() {
         overlay="bg-deep/60"
         className="px-5 pb-24 pt-24 text-on-deep"
       >
-        <Heading>Groomsmen</Heading>
+        <Heading>Caballeros de honor</Heading>
         <Grid people={groomsmen} cols="lg:grid-cols-4" />
       </ParallaxSection>
     </>

@@ -47,13 +47,13 @@ export function ThemeToggle({ withLabel = false }: { withLabel?: boolean }) {
   return (
     <button
       onClick={toggle}
-      aria-label={`Switch to ${next} mode`}
+      aria-label={`Cambiar a modo ${next === "dark" ? "oscuro" : "claro"}`}
       className={`inline-flex cursor-pointer items-center gap-3 text-on-deep opacity-80 transition-[opacity,transform] duration-150 hover:opacity-100 active:scale-95 ${
         withLabel ? "w-full py-3 text-xs uppercase tracking-[0.2em]" : "size-8 justify-center"
       }`}
     >
       <Icon className="size-[18px]" />
-      {withLabel && <span>{next === "dark" ? "Dark mode" : "Light mode"}</span>}
+      {withLabel && <span>{next === "dark" ? "Modo oscuro" : "Modo claro"}</span>}
     </button>
   );
 }

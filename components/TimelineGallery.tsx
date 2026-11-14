@@ -12,12 +12,12 @@ export function TimelineGallery() {
 
   return (
     <div className="collage-tile bg-card p-2.5 sm:p-3">
-      <div className="relative aspect-[1080/750] overflow-hidden" role="group" aria-roledescription="carousel" aria-label="Our vacations">
+      <div className="relative aspect-[1080/750] overflow-hidden" role="group" aria-roledescription="carousel" aria-label="Nuestras vacaciones">
         {slides.map((src, n) => (
           <Image
             key={src}
             src={src}
-            alt={`Our vacations, photo ${n + 1} of ${slides.length}`}
+            alt={`Nuestras vacaciones, foto ${n + 1} de ${slides.length}`}
             fill
             sizes="(min-width: 896px) 520px, 90vw"
             aria-hidden={n !== i}

@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
-  ["Home", "#hero"],
-  ["Our Story", "#loveline"],
-  ["The Wedding", "#the-wedding"],
-  ["Location", "#location"],
-  ["Gallery", "#gallery"],
-  ["RSVP", "#rsvp"],
+  ["Inicio", "#hero"],
+  ["Nuestra historia", "#loveline"],
+  ["La boda", "#the-wedding"],
+  ["Ubicación", "#location"],
+  ["Galería", "#gallery"],
+  ["Asistencia", "#rsvp"],
 ] as const;
 
 export function Header() {
@@ -42,7 +42,7 @@ export function Header() {
         </nav>
         <button
           className="grid size-10 place-items-center text-on-deep md:hidden"
-          aria-label="Toggle menu"
+          aria-label="Abrir o cerrar el menú"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
