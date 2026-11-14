@@ -7,9 +7,15 @@ const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
  * Needs RESEND_API_KEY, RESEND_FROM and RSVP_TO_EMAIL (see .env.example).
  */
 export async function sendRsvpEmail(r: RsvpRecord): Promise<{ sent: boolean; reason?: string }> {
-  const key = process.env.RESEND_API_KEY;
-  const to = process.env.RSVP_TO_EMAIL;
-  const from = process.env.RESEND_FROM ?? "Boda <onboarding@resend.dev>";
+  // Values pasted into a hosting dashboard often keep stray spaces or quote marks; strip them.
+  const env = (name: string) => process.env[name]?.trim().replace(/^["']+|["']+$/g, "").trim() || undefined;
+  const key = env("RESEND_API_KEY");
+  const to = env("RSVP_TO_EMAIL");
+  // Resend only accepts `email@domain` or `Name <email@domain>`; fall back to the default if the value is malformed.
+  const DEFAULT_FROM = "Boda <onboarding@resend.dev>";
+  const fromEnv = env("RESEND_FROM");
+  const validFrom = fromEnv && /^([^<>"]+<[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+>|[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+)$/.test(fromEnv);
+  const from = validFrom ? fromEnv : DEFAULT_FROM;
   if (!key || !to) return { sent: false, reason: "RESEND_API_KEY or RSVP_TO_EMAIL is not set" };
 
   const answer = r.attend === "yes" ? "Sí asistirá" : "No podrá asistir";
